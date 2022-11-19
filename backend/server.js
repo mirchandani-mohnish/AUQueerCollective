@@ -14,12 +14,13 @@ const PORT = process.env.PORT || 5000;
 
 //config MongoDB
 const uri = process.env.MONGO_URI;
-
+console.log(uri);
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+
 const connection = mongoose.connection;
 connection.once("open", () =>
   console.log("MongoDB connection has been established!")
@@ -30,7 +31,7 @@ const postsRouter = require("./routes/posts");
 const authRouter = require("./routes/auth");
 
 app.use("/auth", authRouter);
-// To differentiate backend posts route, I am adding server/
+
 app.use("/server/posts", postsRouter);
 
 //Load the npm build package of the frontend CRA
