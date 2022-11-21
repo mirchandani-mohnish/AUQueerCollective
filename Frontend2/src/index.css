@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .small {
+      @apply grid row-span-1;
+    }
+  
+    .medium {
+      @apply grid row-span-2;
+    }
+  
+    .large {
+      @apply grid row-span-3;
+    }
+  }
