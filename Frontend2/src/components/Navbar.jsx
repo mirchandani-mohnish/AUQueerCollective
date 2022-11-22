@@ -55,14 +55,14 @@ const Navbar = (props) => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <li
-              key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-6
+            <Link to={Menu.link}>
+              <li
+                key={index}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-6
               ${Menu.gap ? "mt-9" : "mt-10"} ${
-                index === 0 && "bg-light-white"
-              } `}
-            >
-              <Link to={Menu.link}>
+                  index === 0 && "bg-light-white"
+                } `}
+              >
                 <img
                   alt=""
                   src={
@@ -82,8 +82,8 @@ const Navbar = (props) => {
                 >
                   {Menu.title}
                 </span>
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
         <div className="flex gap-x-4 items-center absolute bottom-3">
