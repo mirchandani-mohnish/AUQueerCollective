@@ -1,6 +1,4 @@
 import React from "react";
-import Data from "./Eventdata";
-import Pin from "./Pin";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
