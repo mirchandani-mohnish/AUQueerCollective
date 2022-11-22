@@ -9,7 +9,8 @@ import Admin from "./components/Admin";
 import Login from "./components/Login";
 import Roles from "./components/Roles";
 import Event from "./components/Event";
-
+import NewBlog from "./components/NewBlog";
+import Blogs from "./components/Blogs";
 function App() {
   const [open, setOpen] = useState(false);
   return (
@@ -27,7 +28,9 @@ function App() {
         </div>
         <div className="h-5/6 relative bg-light-greys rounded-lg p-7">
           <div className="h-full relative overflow-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-            <Routes>
+            {/* <NewBlog /> */}
+            <Blogs />
+            {/* <Routes>
               <Route
                 path="/"
                 element={<Gallery open={open} setOpen={setOpen} />}
@@ -36,7 +39,7 @@ function App() {
 
               <Route path="/addevents" element={<AddEvents />} />
               <Route path="/event" element={<Event />} />
-            </Routes>
+            </Routes> */}
           </div>
         </div>
       </div>
