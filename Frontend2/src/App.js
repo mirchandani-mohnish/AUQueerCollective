@@ -1,17 +1,44 @@
 import { useState } from "react";
 import AddEvents from "./components/AddEvents";
-
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/Searchbar";
 import Gallery from "./components/Gallery";
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 import Admin from "./components/Admin";
 import Login from "./components/Login";
 import Roles from "./components/Roles";
 import Event from "./components/Event";
 import NewBlog from "./components/NewBlog";
 import Blogs from "./components/Blogs";
+import Conversations from "./components/Conversations";
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Gallery />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/blogs",
+      element: <Blogs />,
+    },
+    {
+      path: "/spaces",
+      element: <Conversations />,
+    },
+    {
+      path: "/admin",
+      element: <Admin />,
+    },
+    {
+      path: "/newblog",
+      element: <NewBlog />,
+    },
+  ]);
   const [open, setOpen] = useState(false);
   return (
     <div className="bg-dark-greys w-screen h-screen ">
@@ -29,7 +56,8 @@ function App() {
         <div className="h-5/6 relative bg-light-greys rounded-lg p-7">
           <div className="h-full relative overflow-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
             {/* <NewBlog /> */}
-            <Blogs />
+            {/* <Blogs /> */}
+            <RouterProvider router={router} />
             {/* <Routes>
               <Route
                 path="/"
