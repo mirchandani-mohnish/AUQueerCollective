@@ -3,7 +3,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import { GoogleLogin } from '@react-oauth/google';
-
+import { verify } from "jsonwebtoken";
 import { useEffect } from "react";
 
 const baseURL = process.env.REACT_APP_BASEURL || "http://localhost:5000";
@@ -27,7 +27,10 @@ const Login = () => {
     //   console.log(userData);
     // }  
     // )
+
     
+    // const userData = verify(response.credentials);
+    // console.log(userData);
     const user = {
       username: response.profileObj.name,
       socialId: response.googleId,
