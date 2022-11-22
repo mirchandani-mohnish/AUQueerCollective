@@ -6,15 +6,15 @@ import bell from "../assets/bell.png";
 import calendar from "../assets/calendar.png";
 import settings from "../assets/settings.png";
 import control from "../assets/control.png";
-
+import { Link } from "react-router-dom";
 const Navbar = (props) => {
   // const [open, setOpen] = useState(false);
   const Menus = [
-    { title: "Home", src: "home" },
-    { title: "Blog", src: "bell" },
+    { title: "Home", src: "home", link: "/" },
+    { title: "Blog", src: "bell", link: "/blogs" },
     //{ title: "Accounts", src: "User", gap: true },
-    { title: "Spaces ", src: "calendar" },
-    { title: "Profile", src: "settings" },
+    { title: "Spaces ", src: "calendar", link: "/spaces" },
+    { title: "Profile", src: "settings", link: "/profile" },
     //{ title: "User", src: "user", gap: true },
   ];
 
@@ -62,25 +62,27 @@ const Navbar = (props) => {
                 index === 0 && "bg-light-white"
               } `}
             >
-              <img
-                alt=""
-                src={
-                  Menu.src === "home"
-                    ? home
-                    : Menu.src === "bell"
-                    ? bell
-                    : Menu.src === "calendar"
-                    ? calendar
-                    : settings
-                }
-              />
-              <span
-                className={`${
-                  !props.open && "hidden"
-                } origin-left duration-200`}
-              >
-                {Menu.title}
-              </span>
+              <Link to={Menu.link}>
+                <img
+                  alt=""
+                  src={
+                    Menu.src === "home"
+                      ? home
+                      : Menu.src === "bell"
+                      ? bell
+                      : Menu.src === "calendar"
+                      ? calendar
+                      : settings
+                  }
+                />
+                <span
+                  className={`${
+                    !props.open && "hidden"
+                  } origin-left duration-200`}
+                >
+                  {Menu.title}
+                </span>
+              </Link>
             </li>
           ))}
         </ul>

@@ -12,33 +12,8 @@ import Event from "./components/Event";
 import NewBlog from "./components/NewBlog";
 import Blogs from "./components/Blogs";
 import Conversations from "./components/Conversations";
+import { Outlet, Link } from "react-router-dom";
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Gallery />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/blogs",
-      element: <Blogs />,
-    },
-    {
-      path: "/spaces",
-      element: <Conversations />,
-    },
-    {
-      path: "/admin",
-      element: <Admin />,
-    },
-    {
-      path: "/newblog",
-      element: <NewBlog />,
-    },
-  ]);
   const [open, setOpen] = useState(false);
   return (
     <div className="bg-dark-greys w-screen h-screen ">
@@ -57,7 +32,7 @@ function App() {
           <div className="h-full relative overflow-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
             {/* <NewBlog /> */}
             {/* <Blogs /> */}
-            <RouterProvider router={router} />
+            <Outlet />
             {/* <Routes>
               <Route
                 path="/"
