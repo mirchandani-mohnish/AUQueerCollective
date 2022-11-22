@@ -7,6 +7,8 @@ import calendar from "../assets/calendar.png";
 import settings from "../assets/settings.png";
 import control from "../assets/control.png";
 
+import { Link } from "react-router-dom";
+
 const Navbar = (props) => {
   // const [open, setOpen] = useState(false);
   const Menus = [
