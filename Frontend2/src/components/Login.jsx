@@ -2,12 +2,14 @@ import React from "react";
 // import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import axios from "axios";
+import { GoogleLogin } from '@react-oauth/google';
 
 import { useEffect } from "react";
 
-import GoogleLogin from "react-google-login";
-
 const baseURL = process.env.REACT_APP_BASEURL || "http://localhost:5000";
+
+
+
 
 const Login = () => {
   useEffect(() => {
@@ -20,14 +22,20 @@ const Login = () => {
   function successGoogleLogin(response) {
     // Create an instance of the user
     console.log(response);
+    // axios.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json').then(
+    // (userData) => {
+    //   console.log(userData);
+    // }  
+    // )
+    
     const user = {
       username: response.profileObj.name,
       socialId: response.googleId,
     };
-    console.log("User instance");
+    console.log(user);
     // Make an API call to either findOrCreate the user
     axios
-      .post(`http://localhost:5000/auth/login`, user)
+      .post("http://localhost:5000/auth/login", user)
       .then((res) => {
         // Reload the page once count is 1 to reload the navbar component and display "Logout" as an option instead of "Login"
         let count = 0;
@@ -116,14 +124,20 @@ const Login = () => {
         </div>
 
         <div className="pt-10">
-          <GoogleLogin
+        <GoogleLogin
+        onSuccess={successGoogleLogin}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
+          {/* <GoogleLogin
             className="bg-[#3ED598] text-white w-full h-[50px] rounded-lg"
             clientId="241223455919-l41jqso8imls9as7vik5sl12q9l800hj.apps.googleusercontent.com"
             buttonText="Log in With Google"
             onSuccess={successGoogleLogin}
             onFailure={failureGoogleLogin}
             cookiePolicy={"single_host_origin"}
-          />
+          /> */}
         </div>
         {/* 
         <div className="pt-10"><button className="bg-[#3ED598] text-white w-full h-[50px] rounded-lg">LOGIN</button></div> */}

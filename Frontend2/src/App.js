@@ -29,7 +29,8 @@ function App() {
         </div>
         <div className="h-5/6 relative bg-light-greys rounded-lg p-7">
           <div className="h-full relative overflow-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
-            <Switch>
+            <Login />
+            {/* <Switch>
               <Route path="/admin" element={<Admin />} />
               <Route path="/login" element={<Login />} />
               <Route path="/write" element={<Write />} />
@@ -39,7 +40,7 @@ function App() {
                 path="/"
                 element={<Gallery open={open} setOpen={setOpen} />}
               />
-            </Switch>
+            </Switch> */}
           </div>
         </div>
       </div>
