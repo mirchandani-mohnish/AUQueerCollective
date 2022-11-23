@@ -7,6 +7,7 @@ const Conversations = () => {
   const [threadRead, setThreadRead] = useState(false);
   const [currentThreadContent, setCurrentThreadContent] = useState([]);
   const [threadReply, setThreadReply] = useState("");
+  const d = new Date();
   useEffect(() => {
     axios
       .get("http://localhost:5000/conversations")
@@ -21,7 +22,7 @@ const Conversations = () => {
     await axios
       .get(`http://localhost:5000/conversations/${threadId}`)
       .then((res) => {
-        setCurrentThreadContent(res);
+        setCurrentThreadContent(res.data);
         console.log(res);
       })
       .catch((e) => {
@@ -38,8 +39,18 @@ const Conversations = () => {
     console.log("need to create a new thread");
   };
 
-  const handleReplySubmit = () => {
-    console.log("reply to thread");
+  const handleReplySubmit = (threadId) => {
+    const threadBody = {
+      title: currentThreadContent.title,
+      author: currentThreadContent.author,
+      body: threadReply,
+      Date: d,
+      threadId: threadId,
+    };
+    axios
+      .post("http://localhost:5000/reply", threadBody)
+      .then((res) => console.log("done"))
+      .catch((e) => console.log("Error in replyig ", e));
   };
 
   if (!threadRead) {
@@ -89,10 +100,13 @@ const Conversations = () => {
           <div className="text-3xl p-3 justify-center font-bold text-white">
             {currentThreadContent.title} <br />
           </div>
-          {currentThreadContent.body &&
-            currentThreadContent.body.map((singleThread, i) => (
-              <div className="text-white text-lg justify-center p-5 m-5">
-                {singleThread}
+          {currentThreadContent &&
+            currentThreadContent.map((singleThread, i) => (
+              <div
+                key={i}
+                className="text-white text-lg justify-center p-5 m-5"
+              >
+                {singleThread.body}
               </div>
             ))}
 
