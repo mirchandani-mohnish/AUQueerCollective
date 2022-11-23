@@ -1,17 +1,8 @@
 import { useState } from "react";
-import AddEvents from "./components/AddEvents";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/Searchbar";
-import Gallery from "./components/Gallery";
-// import { Route, Routes } from "react-router-dom";
-import Admin from "./components/Admin";
-import Login from "./components/Login";
-import Roles from "./components/Roles";
-import Event from "./components/Event";
-import NewBlog from "./components/NewBlog";
-import Blogs from "./components/Blogs";
-import Conversations from "./components/Conversations";
+
 import { Outlet, Link } from "react-router-dom";
 function App() {
   const [open, setOpen] = useState(false);
