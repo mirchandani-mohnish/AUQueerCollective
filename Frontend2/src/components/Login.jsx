@@ -39,6 +39,7 @@ const Login = () => {
       socialId: decodedResponse.socialId,
       username: decodedResponse.username,
     };
+    dispatch(setProfile(decodedResponse));
     axios
       .post("http://localhost:5000/auth/login", loginToken)
       .then((res) => console.log(res))
