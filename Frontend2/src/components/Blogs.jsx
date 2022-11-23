@@ -19,7 +19,7 @@ function Blogs(props) {
       {BlogPosts &&
         BlogPosts.map((data) => (
           <div className="w-[100px] h-[200px] m-5 p-2 border-white text-white bg-gray-500">
-            This is a blog post {data}
+            This is a blog post
           </div>
         ))}
     </div>
