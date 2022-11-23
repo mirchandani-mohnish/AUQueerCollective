@@ -24,16 +24,6 @@ function App() {
             {/* <NewBlog /> */}
             {/* <Blogs /> */}
             <Outlet />
-            {/* <Routes>
-              <Route
-                path="/"
-                element={<Gallery open={open} setOpen={setOpen} />}
-              />
-              <Route path="/admin" element={<Admin />} />
-
-              <Route path="/addevents" element={<AddEvents />} />
-              <Route path="/event" element={<Event />} />
-            </Routes> */}
           </div>
         </div>
       </div>
