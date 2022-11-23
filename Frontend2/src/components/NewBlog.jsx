@@ -3,23 +3,30 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 const NewBlog = () => {
+  let data = "";
+  let userData = {
+    name: "Anonymous",
+  };
   const handleSubmit = (userData, data) => {
+    console.log(data);
+    const d = new Date();
     const postData = {
-      title: data,
-      body: data,
-      author: userData.name,
-      date: " ",
-      comments: ["none", "none"],
+      title: "New Blog",
+      body: toString(data),
+      author: userData.name || "Anonymous",
+      date: d,
     };
+
     axios
       .post("http://localhost:5000/server/posts/create", postData)
-      .then()
+      .then((res) => {
+        console.log(res);
+      })
       .catch((e) => {
         console.log(e);
       });
-    console.log(data);
-    console.log(userData);
   };
+
   return (
     <div className="m-5 p-5 rounded-lg">
       <div className=" m-2 p-2 h3 font-bold text-2xl justify-center text-white">
@@ -32,7 +39,7 @@ const NewBlog = () => {
           console.log("Editor is ready to use!", editor);
         }}
         onChange={(event, editor) => {
-          const data = editor.getData();
+          data = editor.getData();
         }}
         onBlur={(event, editor) => {
           console.log("Blur.", editor);
@@ -45,7 +52,7 @@ const NewBlog = () => {
 
       <button
         className="m-5 p-2 w-40 h-10 rounded-lg bg-green-600 text-white hover:bg-green-800"
-        onClick={handleSubmit}
+        onClick={() => handleSubmit(userData, data)}
       >
         Submit
       </button>
