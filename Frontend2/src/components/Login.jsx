@@ -3,15 +3,19 @@ import { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfile, resetProfile } from "../reducers/authReducer";
 
 const Login = () => {
   const [user, setUser] = useState(null);
-
+  const dispatch = useDispatch();
   const getUser = async () => {
     try {
       const url = `http://localhost:5000/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
       setUser(data.user._json);
+      dispatch(setProfile(data.user._json));
+      console.log(data.user._json);
     } catch (err) {
       console.log(err);
     }
