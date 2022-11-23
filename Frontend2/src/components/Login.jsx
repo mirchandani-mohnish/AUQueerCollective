@@ -31,6 +31,20 @@ const Login = () => {
     window.open(`http://localhost:5000/auth/google/callback`, "_self");
   };
 
+  const handleLoginSuccess = (credentialResponse) => {
+    const decodedResponse = jwt_decode(credentialResponse.credential);
+    console.log(credentialResponse);
+    console.log(decodedResponse);
+    const loginToken = {
+      socialId: decodedResponse.socialId,
+      username: decodedResponse.username,
+    };
+    axios
+      .post("http://localhost:5000/auth/login", loginToken)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  };
+
   console.log(user);
   return (
     <div className="flex py-16 justify-between px-32">
@@ -89,11 +103,7 @@ const Login = () => {
             LOGIN
           </button> */}
           <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              const decoded = jwt_decode(credentialResponse.credential);
-              console.log(credentialResponse);
-              console.log(decoded);
-            }}
+            onSuccess={handleLoginSuccess}
             onError={() => {
               console.log("Login Failed");
             }}

@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
-const passport = require("passport");
+// const passport = require("passport");
 const session = require("express-session");
 
-const passportSetup = require("./passport");
+// const passportSetup = require("./passport");
 const app = express();
 app.use(express.json());
 // app.use(cors());
@@ -20,8 +20,8 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(
   cors({
