@@ -48,6 +48,8 @@ connection.once("open", () =>
 //config routes
 const postsRouter = require("./routes/posts");
 const authRouter = require("./routes/auth");
+const conversationsRouter = require("./routes/conversations");
+app.use("/conversations", conversationsRouter);
 app.use("/auth", authRouter);
 app.use("/server/posts", postsRouter);
 

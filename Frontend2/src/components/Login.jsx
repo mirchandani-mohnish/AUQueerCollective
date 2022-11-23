@@ -5,6 +5,8 @@ import logo from "../assets/logo.png";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfile, resetProfile } from "../reducers/authReducer";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [user, setUser] = useState(null);
@@ -80,12 +82,23 @@ const Login = () => {
         </div>
 
         <div className="pt-10">
-          <button
+          {/* <button
             className="bg-[#3ED598] text-white w-full h-[50px] rounded-lg"
             onClick={googleAuth}
           >
             LOGIN
-          </button>
+          </button> */}
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              const decoded = jwt_decode(credentialResponse.credential);
+              console.log(credentialResponse);
+              console.log(decoded);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+          ;
         </div>
         <div className="pt-5 text-white text-sm flex w-full justify-center">
           New to EP?{" "}
