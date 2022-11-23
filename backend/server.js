@@ -3,14 +3,33 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
+const passport = require("passport");
+const session = require("express-session");
 
-//config Express App
+const passportSetup = require("./passport");
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
-//config PORT
 const PORT = process.env.PORT || 5000;
+app.use(
+  session({
+    name: "session",
+    secret: "mohnishisnice",
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 //config MongoDB
 const uri = process.env.MONGO_URI;
@@ -29,9 +48,7 @@ connection.once("open", () =>
 //config routes
 const postsRouter = require("./routes/posts");
 const authRouter = require("./routes/auth");
-
 app.use("/auth", authRouter);
-
 app.use("/server/posts", postsRouter);
 
 //Load the npm build package of the frontend CRA

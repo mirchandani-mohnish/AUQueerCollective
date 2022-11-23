@@ -1,31 +1,38 @@
 const router = require("express").Router();
-const User = require("../models/user.model");
+const passport = require("passport");
 
-//auth with google
-router.route("/login").post((req, res) => {
-    const { username, socialId } = req.body;
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      error: false,
+      message: "Successfully Loged In",
+      user: req.user,
+    });
+  } else {
+    res.status(403).json({ error: true, message: "Not Authorized" });
+  }
+});
 
-    // Find or create a new user and send it as response
-    User.findOne({ socialId: socialId })
-        .then((foundUser) => {
-            if (foundUser) {
-                res.json(foundUser);
-            } else {
-                const newUser = new User({
-                    username: username,
-                    socialId: socialId,
-                });
-                newUser
-                    .save()
-                    .then(() =>
-                        User.findOne({
-                            socialId: socialId,
-                        }).then((foundNewUser) => res.json(foundNewUser))
-                    )
-                    .catch((err) => res.status(400).json("Error: " + err));
-            }
-        })
-        .catch((err) => res.status(400).json("Error : " + err));
+router.get("/login/failed", (req, res) => {
+  res.status(401).json({
+    error: true,
+    message: "Log in failure",
+  });
+});
+
+router.get("/google", passport.authenticate("google", ["profile", "email"]));
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: process.env.CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect(process.env.CLIENT_URL);
 });
 
 module.exports = router;
