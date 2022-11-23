@@ -29,9 +29,11 @@ connection.once("open", () =>
 //config routes
 const postsRouter = require("./routes/posts");
 const authRouter = require("./routes/auth");
-
+const adminRouter = require("./routes/admin");
+const conversationsRouter = require("./routes/conversations");
+app.use("/conversations", conversationsRouter);
 app.use("/auth", authRouter);
-
+// app.use("/admin", adminRouter);
 app.use("/server/posts", postsRouter);
 
 //Load the npm build package of the frontend CRA
