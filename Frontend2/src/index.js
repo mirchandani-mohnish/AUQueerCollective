@@ -13,6 +13,7 @@ import Login from "./components/Login";
 import NewBlog from "./components/NewBlog";
 import Blogs from "./components/Blogs";
 import Conversations from "./components/Conversations";
+import Profile from "./components/Profile";
 // import Final from './Final';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/newblog",
         element: <NewBlog />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
