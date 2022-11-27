@@ -16,9 +16,9 @@ function Blogs(props) {
     console.log(BlogRead);
   };
 
-  const setBlogHtml = () => {
-    return { _html: currentBlogContent.body };
-  };
+  // const setBlogHtml = () => {
+  //   return { __html: `'<div>hello ${currentBlogContent.body}</div>'` };
+  // };
   useEffect(() => {
     axios
       .get("http://localhost:5000/server/posts/")
@@ -66,9 +66,10 @@ function Blogs(props) {
         <div className="text-xl p-3 justify-center font-bold text-white">
           {currentBlogContent.author}
         </div>
-        <div className="text-white text-lg justify-center p-5 m-5">
-          {currentBlogContent.body}
-        </div>
+        <div
+          className="text-white text-lg justify-center p-5 m-5"
+          dangerouslySetInnerHTML={{ __html: currentBlogContent.body }}
+        ></div>
         <button
           className="w-[100px] h-[50px] text-white m-2 p-2 rounded-lg bg-slate-800 shadow-lg hover:shadow-sm hover:bg-slate-700"
           onClick={() => {
