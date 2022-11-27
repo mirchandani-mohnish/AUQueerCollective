@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import Login from "./Login";
 const Profile = () => {
   const [profile, setProfile] = useState(
     useSelector((state) =>
-      state.auth.value ? state.auth.value.payload : "Login Please"
+      state.auth.value ? state.auth.value.payload : false
     )
   );
 
@@ -22,29 +22,18 @@ const Profile = () => {
           {profile.given_name}{" "}
         </div>
         <div className="text-3xl text-bold text-white"> {profile.name} </div>
-        <div className="text-3xl text-bold text-white">
-          {" "}
-          this is your profile
-        </div>
-        <div className="text-3xl text-bold text-white">
-          {" "}
-          this is your profile
-        </div>
-        <div className="text-3xl text-bold text-white">
-          {" "}
-          this is your profile
-        </div>
-        <div className="text-3xl text-bold text-white">
-          {" "}
-          this is your profile
-        </div>
       </div>
     );
   } else {
     return (
       <div className="text-3xl text-bold text-white">
         {" "}
-        Please login <Link to="/login">Click Here</Link>
+        <Link
+          to="/login"
+          className="flex justify-center bg-white/20 rounded-lg border border-white/30 shadow-lg"
+        >
+          <Login />
+        </Link>
       </div>
     );
   }
